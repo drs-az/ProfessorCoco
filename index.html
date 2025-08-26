@@ -52,11 +52,11 @@
     /* Lesson map */
     section.lessons{padding:24px 0 64px}
     .lessons .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-    .lesson{background:linear-gradient(180deg,#fff, #f8fafc);border:1px solid #e5e7eb;border-radius:16px;padding:16px}
+    .lesson{background:linear-gradient(180deg,#fff, #f8fafc);border:1px solid #e5e7eb;border-radius:16px;padding:16px;cursor:pointer}
     .lesson .num{font-weight:900;color:var(--brand)}
 
     /* Split sections */
-    .split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:64px 0}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:64px 24px}
     .split h2{font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 10px}
     .split p{color:#475569}
 
@@ -91,6 +91,12 @@
     /* Fun micro-animations */
     .floaty{animation:floaty 5s ease-in-out infinite}
     @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+
+    /* Lesson detail modals */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000}
+    .modal.open{display:flex}
+    .modal-content{background:#fff;border-radius:18px;padding:24px;max-width:520px;max-height:90vh;overflow:auto;box-shadow:0 10px 40px rgba(2,6,23,.2);position:relative}
+    .modal-content .close{position:absolute;top:10px;right:12px;background:none;border:none;font-size:1.5rem;font-weight:700;cursor:pointer;color:#334155}
   </style>
 </head>
 <body>
@@ -161,11 +167,11 @@
       <div class="kicker">Lesson map</div>
       <h2 style="margin:.3rem 0 1rem">From first prompt to Prompt Explorer Champion 🏆</h2>
       <div class="cards" role="list">
-        <div class="lesson" role="listitem"><div class="num">01</div><strong>Welcome to Prompt Island</strong><br><small>Intro to prompts</small></div>
-        <div class="lesson" role="listitem"><div class="num">02</div><strong>The Treasure of Clear Prompts</strong><br><small>Clarity & precision</small></div>
-        <div class="lesson" role="listitem"><div class="num">03</div><strong>The Secret Role Masks</strong><br><small>Creativity & perspective</small></div>
-        <div class="lesson" role="listitem"><div class="num">04</div><strong>The Bridge of Iteration</strong><br><small>Improve step‑by‑step</small></div>
-        <div class="lesson" role="listitem"><div class="num">05</div><strong>Prompt Treasure Map</strong><br><small>Put it all together</small></div>
+        <div class="lesson" role="listitem" data-modal="lesson1-modal"><div class="num">01</div><strong>Welcome to Prompt Island</strong><br><small>Intro to prompts</small></div>
+        <div class="lesson" role="listitem" data-modal="lesson2-modal"><div class="num">02</div><strong>The Treasure of Clear Prompts</strong><br><small>Clarity & precision</small></div>
+        <div class="lesson" role="listitem" data-modal="lesson3-modal"><div class="num">03</div><strong>The Secret Role Masks</strong><br><small>Creativity & perspective</small></div>
+        <div class="lesson" role="listitem" data-modal="lesson4-modal"><div class="num">04</div><strong>The Bridge of Iteration</strong><br><small>Improve step‑by‑step</small></div>
+        <div class="lesson" role="listitem" data-modal="lesson5-modal"><div class="num">05</div><strong>Prompt Treasure Map</strong><br><small>Put it all together</small></div>
       </div>
     </div>
   </section>
@@ -214,7 +220,7 @@
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="wrap" style="padding:24px 0 60px">
+  <section id="faq" class="wrap" style="padding:24px 24px 60px">
     <div class="kicker">FAQ</div>
     <details style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin:10px 0"><summary><strong>Is it really free?</strong></summary><p>Yes. Professor Coco is free to access and use.</p></details>
     <details style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin:10px 0"><summary><strong>Does it require training or setup?</strong></summary><p>No. Open the GPT, share the link, and press start. The lessons are fully scripted.</p></details>
@@ -234,6 +240,43 @@
       </div>
     </div>
   </section>
+
+  <!-- Lesson Details Modals -->
+  <div id="lesson1-modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" aria-label="Close">&times;</button>
+      <h3>Lesson 1 – Welcome to Prompt Island 🏝️</h3>
+      <p>Meet Professor Coco and learn what prompts are through games and silly examples. Explore how different prompts change the AI's responses, practice writing prompts for stories and facts, and earn the First Explorer Badge.</p>
+    </div>
+  </div>
+  <div id="lesson2-modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" aria-label="Close">&times;</button>
+      <h3>Lesson 2 – The Treasure of Clear Prompts 💎</h3>
+      <p>Compare vague and specific questions to uncover the Treasure of Clear Prompts. Rewrite prompts with details and numbers, practice refining requests, and earn the Clarity Jewel.</p>
+    </div>
+  </div>
+  <div id="lesson3-modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" aria-label="Close">&times;</button>
+      <h3>Lesson 3 – The Secret Role Masks 🎭</h3>
+      <p>Discover magical role masks that let the AI pretend to be anyone. Try playful characters, see how style shifts with each role, and collect the Mask of Roles.</p>
+    </div>
+  </div>
+  <div id="lesson4-modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" aria-label="Close">&times;</button>
+      <h3>Lesson 4 – The Bridge of Iteration 🔄</h3>
+      <p>Cross the Bridge of Iteration by improving a weak prompt step by step. Refine requests together, tackle a space challenge, and earn the Bridge of Iteration Badge.</p>
+    </div>
+  </div>
+  <div id="lesson5-modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" aria-label="Close">&times;</button>
+      <h3>Lesson 5 – Prompt Treasure Map 🗺️</h3>
+      <p>Build your own Prompt Treasure Map by combining clarity, role masks, and iteration. Design and polish prompts to become the Prompt Explorer Champion.</p>
+    </div>
+  </div>
 
   <footer>
     <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
@@ -266,6 +309,22 @@
           el.classList.add('outline');
         } else {
           el.setAttribute('href', GPT_URL);
+        }
+      });
+    });
+
+    // Lesson modals
+    document.querySelectorAll('.lesson').forEach(card=>{
+      card.addEventListener('click', ()=>{
+        const modalId = card.getAttribute('data-modal');
+        const modal = document.getElementById(modalId);
+        if(modal) modal.classList.add('open');
+      });
+    });
+    document.querySelectorAll('.modal').forEach(modal=>{
+      modal.addEventListener('click', e=>{
+        if(e.target.classList.contains('modal') || e.target.classList.contains('close')){
+          modal.classList.remove('open');
         }
       });
     });
