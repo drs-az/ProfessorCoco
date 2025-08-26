@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Professor Coco the Prompt Explorer 🦜 — Free Classroom GPT</title>
+  <meta name="description" content="A free, story-driven GPT that helps teachers introduce students to AI, LLMs, and prompt engineering through 5 structured lessons." />
+  <meta property="og:title" content="Professor Coco the Prompt Explorer 🦜 — Free Classroom GPT" />
+  <meta property="og:description" content="A free, story-driven GPT for teaching AI & prompting in 5 fun, structured lessons. Built for teachers." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f0fbff;--ink:#0f172a;--muted:#334155;--brand:#0ea5e9;--brand-dark:#0284c7;--accent:#f59e0b;--island:#d9f99d;--leaf:#22c55e;}
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family:Nunito,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#ecfeff 0%,#f0fbff 40%,#ffffff 100%);} 
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+    /* Utility */
+    .btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--brand);color:#fff;border:none;border-radius:14px;padding:14px 20px;font-weight:800;letter-spacing:.2px;box-shadow:0 8px 24px rgba(14,165,233,.25);transition:transform .15s ease, box-shadow .2s ease, background .2s ease}
+    .btn:hover{transform:translateY(-1px);background:var(--brand-dark);box-shadow:0 12px 28px rgba(2,132,199,.28)}
+    .btn.outline{background:transparent;color:var(--brand);border:2px solid var(--brand)}
+    .kicker{font-weight:800;color:var(--brand-dark);text-transform:uppercase;letter-spacing:.12em;font-size:.8rem}
+
+    /* Hero */
+    header.hero{position:relative;overflow:hidden;padding:88px 0 64px}
+    .hero .content{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+    .hero h1{font-family:Montserrat, Nunito, sans-serif;font-size:clamp(2rem,4.8vw,3.4rem);line-height:1.05;margin:.4rem 0;color:#0b1220}
+    .hero p{font-size:1.125rem;color:var(--muted);margin:14px 0 22px}
+    .island{position:absolute;inset:auto -5vw 0 -5vw;height:180px;z-index:-1;background:
+      radial-gradient(80% 60% at 50% 0%, rgba(14,165,233,.16), transparent 60%),
+      radial-gradient(60% 60% at 80% 20%, rgba(245,158,11,.18), transparent 60%),
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="260"><ellipse cx="800" cy="220" rx="720" ry="40" fill="%230ea5e922"/><ellipse cx="800" cy="200" rx="560" ry="26" fill="%230ea5e922"/></svg>') bottom/cover no-repeat;
+    }
+
+    /* Coco mark */
+    .coco{display:flex;align-items:center;gap:10px}
+    .coco svg{width:42px;height:42px}
+    .badge{display:inline-flex;align-items:center;gap:.4rem;background:#fff;border:1px solid #e2e8f0;border-radius:999px;padding:8px 12px;font-weight:700;box-shadow:0 6px 18px rgba(2,6,23,.06)}
+
+    /* Feature grid */
+    section.features{padding:56px 0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:22px;box-shadow:0 10px 26px rgba(2,6,23,.06)}
+    .card h3{margin:0 0 8px;font-size:1.05rem}
+    .card p{margin:0;color:#475569}
+
+    /* Lesson map */
+    section.lessons{padding:24px 0 64px}
+    .lessons .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .lesson{background:linear-gradient(180deg,#fff, #f8fafc);border:1px solid #e5e7eb;border-radius:16px;padding:16px}
+    .lesson .num{font-weight:900;color:var(--brand)}
+
+    /* Split sections */
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:64px 0}
+    .split h2{font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 10px}
+    .split p{color:#475569}
+
+    /* Testimonials */
+    section.say{padding:40px 0}
+    .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    blockquote{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:18px;box-shadow:0 6px 18px rgba(2,6,23,.06);font-style:italic;color:#334155}
+    blockquote footer{margin-top:10px;font-style:normal;font-weight:800;color:#0f172a}
+
+    /* CTA band */
+    .cta{position:relative;background:linear-gradient(135deg,#0ea5e9 0%,#22c55e 100%);color:#05223a;border-radius:22px;padding:28px 28px 32px;box-shadow:0 18px 50px rgba(14,165,233,.28)}
+    .cta h3{margin:0 0 10px;color:#061527}
+    .cta p{margin:0 0 16px;color:#0b2d45}
+
+    /* Footer */
+    footer{padding:40px 0 60px;color:#475569}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero .content{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr 1fr}
+      .lessons .cards{grid-template-columns:1fr 1fr 1fr}
+      .quotes{grid-template-columns:1fr 1fr}
+      .split{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .grid{grid-template-columns:1fr}
+      .lessons .cards{grid-template-columns:1fr 1fr}
+      .quotes{grid-template-columns:1fr}
+    }
+
+    /* Fun micro-animations */
+    .floaty{animation:floaty 5s ease-in-out infinite}
+    @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+  </style>
+</head>
+<body>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap content">
+      <div>
+        <div class="coco">
+          <span class="badge">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="pg" x1="0" x2="1"><stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#22c55e"/></linearGradient>
+              </defs>
+              <circle cx="32" cy="32" r="30" fill="url(#pg)" opacity=".2"/>
+              <path d="M38 22c4 1 7 5 7 9 0 6-5 11-11 11h-7c-5 0-8-3-8-7 0-3 2-5 5-6 2-7 6-9 14-7z" fill="#0ea5e9"/>
+              <circle cx="38" cy="27" r="3" fill="#fff"/>
+              <circle cx="39" cy="27" r="1.5" fill="#0f172a"/>
+              <path d="M46 34c-3 2-6 3-9 3 2 1 4 2 7 2 2 0 3-2 2-5z" fill="#f59e0b"/>
+            </svg>
+            Professor Coco the Prompt Explorer 🦜
+          </span>
+        </div>
+        <h1>Unlock the Magic of AI in Your Classroom ✨</h1>
+        <p>Introduce your students to Large Language Models (LLMs) with a playful, story-driven journey. 
+          Professor Coco guides five structured lessons that build digital literacy, critical thinking, and creativity.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+          <a class="btn" id="launchCta" href="#launch">Start the Adventure — Free</a>
+          <a class="btn outline" href="#map">View Lesson Map</a>
+        </div>
+      </div>
+      <div>
+        <svg class="floaty" viewBox="0 0 560 420" width="100%" aria-hidden="true">
+          <defs>
+            <linearGradient id="sea" x1="0" x2="1"><stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#22c55e"/></linearGradient>
+          </defs>
+          <rect x="0" y="0" width="560" height="420" rx="24" fill="#ffffff" stroke="#e2e8f0"/>
+          <ellipse cx="280" cy="350" rx="220" ry="24" fill="#0ea5e922"/>
+          <circle cx="420" cy="80" r="14" fill="#f59e0b"/>
+          <path d="M90 320c40-50 110-70 170-58 42 8 84 6 126-18 22-13 49-40 79-83 12 62-1 105-39 129-26 17-74 34-146 24-70-9-155 41-190 6z" fill="#d9f99d"/>
+          <path d="M210 250c20 6 34 1 46-10 10-9 25-12 40-6 13 6 29 4 42-2 25-12 52-52 80-118" fill="none" stroke="url(#sea)" stroke-width="6" stroke-linecap="round"/>
+          <text x="40" y="60" font-family="Montserrat, sans-serif" font-size="28" font-weight="800" fill="#0b1220">Exploring Prompt Island</text>
+          <text x="40" y="92" font-family="Nunito, sans-serif" font-size="16" fill="#334155">Story-led lessons • Badges • Teacher-friendly pacing</text>
+        </svg>
+      </div>
+    </div>
+    <div class="island"></div>
+  </header>
+
+  <!-- WHY TEACHERS LOVE IT -->
+  <section class="features">
+    <div class="wrap">
+      <div class="kicker">Why teachers love it</div>
+      <h2 style="margin:.3rem 0 1rem;font-size:clamp(1.4rem,3.2vw,2rem)">A zero-prep, high-engagement way to teach AI literacy</h2>
+      <div class="grid" aria-label="feature list">
+        <div class="card"><h3>Engaging & safe</h3><p>Story-driven lessons keep learners focused while modeling responsible AI use.</p></div>
+        <div class="card"><h3>Structured & paced</h3><p>Five 30-minute lessons, each with six segments blending explanation, activity, and reflection.</p></div>
+        <div class="card"><h3>No setup required</h3><p>Run it from the GPT. Everything’s scripted and ready to go—perfect for busy classrooms.</p></div>
+        <div class="card"><h3>Progress & badges</h3><p>Automatically tracks each learner and celebrates milestones with badges and a final trophy.</p></div>
+        <div class="card"><h3>21st‑century skills</h3><p>Builds digital literacy, creativity, clarity, and iteration—core to effective AI collaboration.</p></div>
+        <div class="card"><h3>Completely free</h3><p>No licenses or hidden paywalls. Launch and teach today.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON MAP -->
+  <section id="map" class="lessons">
+    <div class="wrap">
+      <div class="kicker">Lesson map</div>
+      <h2 style="margin:.3rem 0 1rem">From first prompt to Prompt Explorer Champion 🏆</h2>
+      <div class="cards" role="list">
+        <div class="lesson" role="listitem"><div class="num">01</div><strong>Welcome to Prompt Island</strong><br><small>Intro to prompts</small></div>
+        <div class="lesson" role="listitem"><div class="num">02</div><strong>The Treasure of Clear Prompts</strong><br><small>Clarity & precision</small></div>
+        <div class="lesson" role="listitem"><div class="num">03</div><strong>The Secret Role Masks</strong><br><small>Creativity & perspective</small></div>
+        <div class="lesson" role="listitem"><div class="num">04</div><strong>The Bridge of Iteration</strong><br><small>Improve step‑by‑step</small></div>
+        <div class="lesson" role="listitem"><div class="num">05</div><strong>Prompt Treasure Map</strong><br><small>Put it all together</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS / TEACHER FIT -->
+  <section class="split wrap">
+    <div>
+      <div class="kicker">How it works</div>
+      <h2>Run a guided AI adventure in minutes</h2>
+      <p>Professor Coco leads the session end‑to‑end: explains concepts, asks questions, waits for responses,
+        follows up with layered prompts, and awards badges. You facilitate, they explore.</p>
+      <ul>
+        <li>Scripted dialogue and activities</li>
+        <li>Six segments per lesson (~5 minutes each)</li>
+        <li>Built‑in pacing and gentle redirection</li>
+        <li>Individual progress tracking</li>
+      </ul>
+      <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" href="#launch">Launch Free</a>
+        <a class="btn outline" href="#faq">See FAQ</a>
+      </div>
+    </div>
+    <div>
+      <div class="kicker">Perfect for</div>
+      <h2>Digital literacy • Computer science • ELA</h2>
+      <p>Use it as a stand‑alone mini‑unit, a center activity, an enrichment track, or a fun Friday.
+        It fits anywhere you want students to practice clarity, creativity, and iterative thinking.</p>
+      <div class="cta" style="margin-top:8px">
+        <h3>Completely free for teachers</h3>
+        <p>Share the link with your class LMS, and you’re set. No installs. No training.</p>
+        <a class="btn" href="#launch">Get the Free GPT</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="say">
+    <div class="wrap">
+      <div class="kicker">What teachers are saying</div>
+      <div class="quotes" aria-label="testimonials">
+        <blockquote>“My students were hooked from minute one. Coco turned AI into an adventure.”<footer>— 6th Grade Teacher</footer></blockquote>
+        <blockquote>“Finally, a safe, structured way to introduce LLMs without hours of prep.”<footer>— Technology Coach</footer></blockquote>
+        <blockquote>“The badges and role‑play kept engagement sky‑high. Best Friday we’ve had.”<footer>— ELA Teacher</footer></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="wrap" style="padding:24px 0 60px">
+    <div class="kicker">FAQ</div>
+    <details style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin:10px 0"><summary><strong>Is it really free?</strong></summary><p>Yes. Professor Coco is free to access and use.</p></details>
+    <details style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin:10px 0"><summary><strong>Does it require training or setup?</strong></summary><p>No. Open the GPT, share the link, and press start. The lessons are fully scripted.</p></details>
+    <details style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin:10px 0"><summary><strong>Is it appropriate for younger learners?</strong></summary><p>It uses accessible, classroom‑friendly language and teacher‑guided pacing. You decide what’s right for your class.</p></details>
+    <details style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin:10px 0"><summary><strong>Can students use it independently?</strong></summary><p>Yes. It tracks individual progress and awards badges, making it great for centers or homework.</p></details>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="wrap" style="padding-bottom:80px">
+    <div class="cta">
+      <h3>Bring AI literacy to your classroom today</h3>
+      <p>Professor Coco the Prompt Explorer 🦜 turns AI into an approachable, joyful learning journey.
+        It’s free, structured, and classroom‑ready.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" id="launch" href="#">Launch the GPT</a>
+        <a class="btn outline" href="#map">Preview the Lessons</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>© <span id="year"></span> Professor Coco • Built for teachers</div>
+      <div style="display:flex;gap:12px">
+        <a href="#map">Lessons</a>
+        <a href="#faq">FAQ</a>
+        <a href="#launch">Free Access</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Smooth scroll for in‑page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+      const id=a.getAttribute('href').slice(1);
+      if(!id) return;
+      const el=document.getElementById(id);
+      if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
+    }));
+    // Replace placeholder launch link with your GPT Store URL
+    const GPT_URL = 'https://chatgpt.com/g/g-68ad2dda8a54819190c9aef612a5aecf-professor-coco-the-prompt-explorer'; // ← swap with the real link when live
+    document.querySelectorAll('#launch, #launchCta').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        if(GPT_URL.includes('gpt-professor-coco')){
+          // Still placeholder – highlight for the publisher
+          el.textContent = 'Add your GPT link in code';
+          el.classList.add('outline');
+        } else {
+          el.setAttribute('href', GPT_URL);
+        }
+      });
+    });
+  </script>
+</body>
+  </html>
+  
